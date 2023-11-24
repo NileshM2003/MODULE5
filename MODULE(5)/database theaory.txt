@@ -1,0 +1,226 @@
+MODULE: 5 (Database)
+==============================================================================
+Q.1 What do you understand By Database ?
+
+ANS:-A database is an organized collection of structured information,or data, typically stored electronically
+          in a computer system.
+==================================================================================
+Q.2 What is  Normalization?
+
+ANS:- Normalization is the process of organizing a database to reduce redundancy and improve data integrity.
+                                 
+                                     (i)It is used to minimize the redundancy from a relation or set of relations. 
+                                     (ii)Minimizes data redundancy (duplicate data).
+                                     (iii)It divides big table into small tables.
+===========================================================================================
+Q.3 What is Difference between DBMS and RDBMS? 
+
+ANS:-=================================================================================
+                                       DBMS                                                                                                             RDBMS
+                                                                                                   
+1)DBMS stands for DataBase Managemen stystem.                   |  1) RDBMS stands for Relational DataBase Management
+                                                                                                        |   System.
+
+2)It does not support client server architecture.                           |  2) It support client server architecture.
+
+3)Heirarchical arrangement of data.                                              |  3) Stores data in the form of rows and column.
+
+4)DBMS stores data as file.                                                              |  4)RDBMS stores data in tabular form.
+
+5)Normalization is not present.                                                       |   5)Normalization is present.
+
+6)It deals with small quantity of data.                                            |    6)It deals with large amount of data.
+
+7)Data redundancy is common in this model.                               |  7)Keys and indexes do not allow Data redundancy.
+
+8)Security is less.                                                                               |    8)Security is less.
+=============================================================================================
+Q.4 What is MF Cod Rule of RDBMS Systems? 
+ANS:-
+              Rule 0-  Foundation rule
+              Rule 1-  Rule of Information
+              Rule 2-  Rule of Guaranteed access 
+              Rule 3-  Rule of Systematic null  value support
+              Rule 4-  Rule of Active  and  online catalog
+              Rule 5-  Rule of Comprehensive data sub-language rule
+              Rule 6-  Rule of updating views
+              Rule 7-  Rule of set level insertion,update and deletion
+              Rule 8-  Rule of physical data independence
+              Rule 9-  Rule of logical data independence
+	      Rule 10- Rule of integrity independence
+              Rule 11- Rule of distribution independence
+              Rule 12- Rule of non-subversion
+============================================================================================
+Q.5 What do you understand By Data Redundancy? 
+ANS:-
+Data redundancy refers to the practice of keeping data in two or more places within a database or data storage system.
+Data redundancy can occur within an organization intentionally or accidentally.
+
+===========================================================================================
+Q.6 What is DDL Interpreter? 
+ANS:-
+>DDL is short name of Data Definition Language, which deals with database schemas and descriptions, of how the data should reside in the database.
+>DDL statements-   CREATE,DROP,TRUNCATE,ALTER,RENAME.
+
+==================================================================================================
+Q.7 What is DML Compiler in SQL? 
+ANS:-
+> It translates DML(Data Manipulation Language) statements in a query language within 
+                      low level instructions understandable through the query evaluation engine.
+ >  DML statements-  INSERT, UPDATE, DELETE.
+
+==================================================================================================
+Q.8 What is SQL Key Constraints writing an Example of SQL Key Constraints?
+ANS:-
+SQL constraints are used to specify rules for the data in a table.
+      Types of key constraints: 
+                     
+             1. A PRIMARY KEY is a field which can uniquely identify each row in a table.
+             2. NOT NULL constraints tells that we cannot store a null value in a column.
+             3. A FOREIGN KEY is a field which can uniquely identify each row  in another table.    
+             4. CHECK constraint helps to validate the value of a column to meet a particular condition. 
+             5. DEFAULT constraints specifies a default value for the column when no value is specified by 
+                    the user.
+             6.UNIQUE constraints tells that the values in the column must be unique.
+
+ > EXAMPLE:-> CREATE TABLE  persons(
+                    ID (int) NOT NULL PRIMARY KEY, Name varchar(250) NOT NULL, Age (int));
+
+==================================================================================================
+Q.9 What is save Point? How to create a save Point write a Query? 
+ANS:-
+>Savepoint is a command in SQL that is used with the rollback command.It is a command in Transaction Control Language that is used to 
+mark the transaction in a table.
+>Consider you are making a very long table, and you want to roll back only to a certain position in a table then; this can be achieved 
+using the savepoint.
+
+==================================================================================================
+Q.10 What is trigger and how to create a Trigger in SQL? 
+ANS:-
+ A trigger is a set of actions that are run automatically when a specified
+ change operation (SQL INSERT, UPDATE, or DELETE statement) is performed on a
+ specified table. Triggers are useful for tasks such as enforcing business rules,
+ validating input data, and keeping an audit trail.
+
+syntax:-
+CREATE TRIGGER trigger_name   
+ON { Table name or view name }   
+[ WITH <Options> ]  
+{ FOR | AFTER | INSTEAD OF }   
+{ [INSERT], [UPDATE] , [DELETE] }
+
+Example:-
+1)CREATE TABLE EmpLog (
+	LogID int IDENTITY(1,1) NOT NULL,
+	EmpID int NOT NULL,
+	Operation nvarchar(10) NOT NULL,
+	UpdatedDate Datetime NOT NULL)
+
+2)CREATE TRIGGER dbo.trgEmployeeInsert
+ON dbo.Employee
+FOR INSERT	
+AS
+    INSERT INTO dbo.EmpLog(EmpID, Operation, UpdatedDate)
+    SELECT EmployeeID ,'INSERT',GETDATE() FROM INSERTED; --virtual table INSERTED
+===========================================================================================
+                                                                                             ---DATABASE TABLES---
+Q1:- TABLE (student,exam)
+
+student
+CREATE TABLE student(rollno int(5) NOT null AUTO_INCREMENT PRIMARY KEY,name varchar(50),branch varchar(30));
+INSERT INTO student(name,branch)VALUES('jay','computer science'),('suhani','electric'),('kriti','electric');
+
+exam
+CREATE TABLE exam(rollno int(10) NOT null,S_code varchar(50),marks int(100),P_code varchar(50),FOREIGN KEY(rollno) REFERENCES student(rollno));
+
+INSERT INTO `exam` (`rollno`, `S_code`, `marks`, `P_code`) VALUES ('1', 'CS11', '50', 'CS');
+INSERT INTO `exam` (`rollno`, `S_code`, `marks`, `P_code`) VALUES ('1', 'CS12', '60', 'CS');
+INSERT INTO `exam` (`rollno`, `S_code`, `marks`, `P_code`) VALUES ('2', 'EC101', '66', 'EC');
+INSERT INTO `exam` (`rollno`, `S_code`, `marks`, `P_code`) VALUES ('2', 'EC102', '70', 'EC');
+INSERT INTO `exam` (`rollno`, `S_code`, `marks`, `P_code`) VALUES ('3', 'EC101', '45', 'EC');
+INSERT INTO `exam` (`rollno`, `S_code`, `marks`, `P_code`) VALUES ('3', 'EC102', '50', 'EC');
+
+============================================================================================
+
+Q2:-TABLE
+
+CREATE TABLE task2(first_name varchar(25),last_name varchar(25),address varchar(30),city varchar(30),age int(100));
+
+INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('Mickey', 'Mouse', '123 Fantasy Way', 'Anahein', '73'), ('Bat ', 'Man', '321 Canvem Ave', 'Gotham', '54');
+INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('Wonder', 'Women', '987 Truth Way', 'Paradise', '39'), ('Donald', 'Duck', '555 Quack Street ', 'Mallarad', '65');
+5.INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('Bugs', 'Bunny', '567 carrot street', 'Rascal', '58'), ('Wilkey', 'Coyote', '999 Acme Way', 'Canyon', '61');
+6.INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('Cat', 'Women', '234 Purrfect Street ', 'Haieball', '32'), ('Tweety', 'Bird', '543', 'Itotltaw', '28');
+===========================================================================================================
+
+Q3 TABLE 3 (employee,incentive)
+
+employee:-
+CREATE TABLE employee(employee_id int(10) NOT null PRIMARY KEY AUTO_INCREMENT,first_name varchar(25),last_name varchar(25),salary int(30),joining_date varchar(30),department varchar(30));
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES (NULL, 'john', 'abhram', '1000000', '01-JAN-13 12:00.00AM', 'Banking'), (NULL, 'Michael', 'Clarke', '800000', '01-JAN-13 12:00.00AM', 'Insuarance');
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES (NULL, 'Roy', 'thomas', '700000', '01-FEB-13 12:00.00AM', 'Banking'), (NULL, 'tom', 'jose', '600000', '01-FEB-13 12:00.00AM', 'Insuarance');
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES (NULL, 'jerry', 'pinto', '650000', '01-FEB-13 12:00.00AM', 'Insuarance'), (NULL, 'philip', 'mathew', '750000', '01-JAN-13 12:00.00AM', 'service');
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES (NULL, 'testname1', '123', '650000', '01-JAN-13 12:00.00AM', 'Service'), (NULL, 'testname2', 'lname%', '600000', '01-FEB-13 12:00.00AM', 'Insuarance');
+
+incentive:-
+CREATE TABLE incentive(employee_ref_id int(20),incentive_date varchar(25),incentive_amount int(30));
+INSERT INTO `incentive` (`employee_ref_id`, `incentive_date`, `incentive_amount`) VALUES ('1', '01-FEB-13', '5000'), ('2', '01-FEB-13', '3000');
+INSERT INTO `incentive` (`employee_ref_id`, `incentive_date`, `incentive_amount`) VALUES ('3', '01-FEB-13', '4000'), ('1', '01-FEB-13', '4500');
+INSERT INTO `incentive` (`employee_ref_id`, `incentive_date`, `incentive_amount`) VALUES ('2', '01-JAN-13', '3500');
+
+a) Get First_Name from employee table using Tom name “Employee Name”.
+Ans-SELECT *FROM employee WHERE first_name='tom';
+
+b) Get FIRST_NAME, Joining Date, and Salary from employee table.
+Ans-SELECT first_name,joining_date,salary FROM employee;
+
+c) Get all employee details from the employee table order by First_Name
+Ascending and Salary descending?
+Ans-SELECT * FROM employee ORDER BY employee.first_name ASC,employee.salary DESC;
+(Note:-SELECT * FROM employee ORDER BY employee.first_name ASC
+            SELECT * FROM employee ORDER BY employee.salary DESC;)
+
+d) Get employee details from employee table whose first name contains ‘J’.
+ Ans-SELECT * FROM employee WHERE first_name LIKE '%j%';
+
+e) Get department wise maximum salary from employee table order by salary
+ascending?
+Ans-SELECT * FROM employee ORDER BY salary ASC;
+
+f) Select first_name, incentive amount from employee and incentives table for
+those employees who have incentives and incentive amount greater than 3000 
+Ans-SELECT first_name,incentive_amount FROM employee INNER JOIN incentive ON employee.employee_id=incentive.employee_ref_id AND incentive_amount >3000;
+===================================================================================================================
+
+Q4-TABLE 4:- (salesperson,customer )
+
+CREATE TABLE salesperson (pk_sno int(10),sname varchar(30),city varchar(30),comm varchar(20));
+
+salesperson :-
+INSERT INTO salesperson (pk_sno,sname,city,comm)VALUES(1001,'peel','london',.12);
+INSERT INTO salesperson (pk_sno,sname,city,comm)VALUES(1002,'seeres','san jose',.13),(1004,'motika','london',.11),(1007,'refkin','barcelona',.15),(1003,'axelrod','new york',.13);
+customer :-
+CREATE TABLE customer (pk_cnm int(10),cname varchar(30),city varchar(30),rating int(10),pk_sno int(10),PRIMARY KEY pk_cnm,FOREIGN KEY fk_sno REFRENCES salesperson (sno));
+
+INSERT INTO `customer` (`pk_cnm`, `cname`, `city`, `rating`, `fk_sno`) VALUES ('201', 'hoffman', 'london', '100', '1001'), ('202', 'giovanne', 'roe', '200', '1003');
+INSERT INTO `customer` (`pk_cnm`, `cname`, `city`, `rating`, `fk_sno`) VALUES ('203', 'liu', 'san jose', '300', '1002'), ('204', 'grass', 'barcelona', '100', '1002');
+
+==>Retrieve the below data from above table ?
+ SELECT * FROM customer
+SELECT * FROM salesperson
+
+a) All orders for more than $1000. 
+Ans:-SELECT * FROM salesperson WHERE pk_sno >1000;
+
+b) Names and cities of all salespeople in London with commission above 0.12 
+Ans:-SELECT sname,city,comm FROM salesperson WHERE comm >0.12 AND city = 'london';
+
+c) All salespeople either in Barcelona or in London 
+Ans:-SELECT sname,city FROM salesperson WHERE city in ('barcelona','london');
+
+d) All salespeople with commission between 0.10 and 0.12. (Boundary values
+should be exclud
+Ans:-SELECT sname,comm FROM salesperson WHERE comm > 0.10 AND < 0.12;
+
+e) All customers excluding those with rating <= 100 unless they are located in
+Rome
+Ans:-SELECT cname FROM customer WHERE rating <=100 OR city = 'rome';
